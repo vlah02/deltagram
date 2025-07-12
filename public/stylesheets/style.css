@@ -325,6 +325,17 @@ ul.diff-list li {
   margin-bottom: 0.4rem;
 }
 
+.diff-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.diff-col {
+  flex: 1 1 0;
+  min-width: 220px;
+}
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -483,4 +494,33 @@ body.dark-mode .common-btn:hover {
   width: 28px;
   height: 28px;
   display: block;
+}
+
+.main-tabs {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: var(--accent3);
+  font-size: 1.1rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-weight: 600;
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+  background: var(--container-bg);
+  color: var(--accent);
+}
+body.dark-mode .tab-btn.active,
+body.dark-mode .tab-btn:hover {
+  background: var(--container-bg);
+  color: var(--accent3);
 }

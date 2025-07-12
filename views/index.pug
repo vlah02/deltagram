@@ -13,21 +13,58 @@ block content
       button.upload-btn Upload
 
     main.main-content
-      each diff in diffs
-        .comparison
-          h3 #{diff.from_date} → #{diff.to_date}
+      .main-tabs
+        button.tab-btn.active#followersTab Followers
+        button.tab-btn#followingTab Following
 
-          - ['Followers Added', 'Followers Removed', 'Following Added', 'Following Removed'].forEach(label => {
-            - const key = label.toLowerCase().replace(/ /g, '_');
-            h4 #{label}
-            - const arr = JSON.parse(diff[key])
-            if arr.length
-              ul
-                each user in arr
-                  li #{user}
-            else
-              p None
-          - })
+      .diffs-section#followersContent
+        each diff in diffs.slice().reverse()
+          .comparison
+            h3 #{diff.from_date} → #{diff.to_date}
+            .diff-row
+              .diff-col
+                h4 Followers Added
+                - const arrAdded = JSON.parse(diff['followers_added'])
+                if arrAdded.length
+                  ul
+                    each user in arrAdded
+                      li #{user}
+                else
+                  p None
+              .diff-col
+                h4 Followers Removed
+                - const arrRemoved = JSON.parse(diff['followers_removed'])
+                if arrRemoved.length
+                  ul
+                    each user in arrRemoved
+                      li #{user}
+                else
+                  p None
+
+      .diffs-section#followingContent(style="display:none;")
+        each diff in diffs.slice().reverse()
+          .comparison
+            h3 #{diff.from_date} → #{diff.to_date}
+            .diff-row
+              .diff-col
+                h4 Following Added
+                - const arrAdded = JSON.parse(diff['following_added'])
+                if arrAdded.length
+                  ul
+                    each user in arrAdded
+                      li #{user}
+                else
+                  p None
+              .diff-col
+                h4 Following Removed
+                - const arrRemoved = JSON.parse(diff['following_removed'])
+                if arrRemoved.length
+                  ul
+                    each user in arrRemoved
+                      li #{user}
+                else
+                  p None
+
 
   .modal#uploadModal
     .modal-content
