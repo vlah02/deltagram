@@ -3,21 +3,23 @@ html
   head
     title Deltagram
     link(rel="icon" href="/images/deltagram-icon.ico" type="image/x-icon")
+    link(rel="stylesheet", href="/stylesheets/tailwind.css")
     link(rel="stylesheet", href="/stylesheets/style.css")
+    link(rel="stylesheet", href="/stylesheets/custom.css")
 
-  body
-    header
+  body(class="bg-[var(--bg)] text-[var(--text)] font-sans dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] ")
+    header(class="flex justify-center items-center p-4 border-b border-header-border dark:border-dark-text bg-header-bg dark:bg-dark-header-bg")
       a(href="/")
-        img.logo(src="/images/deltagram-top.png", alt="Deltagram logo")
+        img.logo(src="/images/deltagram-top.png", alt="Deltagram logo" class="h-20 align-middle")
 
-    button#darkModeToggle.common-btn(type="button" aria-label="Toggle dark mode")
+    button#darkModeToggle(class="common-btn absolute top-32 right-5 bg-accent rounded-full w-14 h-14 flex items-center justify-center shadow-lg transition-all cursor-pointer z-10")
       img#themeIcon(src="/images/moon.svg" alt="Toggle dark mode" width="28" height="28")
 
     .main-wrapper
       block content
 
     if user
-      a#logoutBtn.common-btn(href="/auth/logout" title="Logout")
+      a#logoutBtn(class="common-btn absolute bottom-5 right-5 bg-accent2 rounded-full w-14 h-14 flex items-center justify-center shadow-lg transition-all cursor-pointer z-10" href="/auth/logout" title="Logout")
         svg(width="28" height="28" viewBox="0 0 24 24")
           path(fill="currentColor", d="M16 13v-2H7V8l-5 4 5 4v-3zM20 3H10v2h10v14H10v2h10a2 2 0 002-2V5a2 2 0 00-2-2z")
 

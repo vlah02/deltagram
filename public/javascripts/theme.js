@@ -12,16 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let darkMode = localStorage.getItem('theme') === 'dark';
 
     function updateTheme() {
-        document.body.classList.toggle('dark-mode', darkMode);
+        document.documentElement.classList.toggle('dark', darkMode);
         iconImg.src = darkMode ? icons.sun : icons.moon;
         iconImg.style.filter = darkMode ? '' : '';
-    }
-    function updateIcon(filled = false) {
-        if (darkMode) {
-            iconImg.src = filled ? icons.sunFill : icons.sun;
-        } else {
-            iconImg.src = filled ? icons.moonFill : icons.moon;
-        }
     }
 
     updateTheme();
@@ -31,7 +24,4 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('theme', darkMode ? 'dark' : 'light');
         updateTheme();
     });
-
-    toggleBtn.addEventListener('mouseenter', () => updateIcon(true));
-    toggleBtn.addEventListener('mouseleave', () => updateIcon(false));
 });

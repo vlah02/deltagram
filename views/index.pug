@@ -1,82 +1,74 @@
 extends layout
 
 block content
-  .container
-    aside
-      h3 Uploaded Zips
-      ul.upload-list
+  .container(class="flex gap-6 max-w-7xl mx-auto py-8")
+    aside(class="w-64 bg-sidebar-bg dark:bg-dark-sidebar-bg p-4 pb-6 border border-sidebar-border dark:border-dark-sidebar-border rounded-lg shadow-lg")
+      h3(class="text-text dark:text-dark-text text-lg font-semibold mb-4") Uploaded Zips
+      ul(class="upload-list list-none p-0 mb-6")
         each file in files
-          li
-            span.file-name #{file.filename} (#{file.date || file.created_at})
+          li(class="flex justify-between items-center border-b border-gray-300 py-2 dark:border-gray-700")
+            span(class="file-name flex-1 text-sm text-text dark:text-dark-text break-words leading-5")
+              | #{file.filename} (#{file.date || file.created_at})
             form(method="POST", action=`/upload/delete/${file.id}`)
-              button.delete-btn(type="submit") ✕
-      button.upload-btn Upload
+              button(class="delete-btn text-danger text-lg font-bold leading-none p-0") ✕
+      button(class="upload-btn w-full py-3 bg-accent text-white font-medium rounded-md cursor-pointer transition-colors hover:bg-accent-hover") Upload
 
-    main.main-content
+    main(class="main-content flex-1")
       script.
-        window.followHistory = !{JSON.stringify(history)};
+        window.followHistory = !{JSON.stringify(history)}
 
-      .main-tabs
-        button.tab-btn.active#followersTab Followers
-        button.tab-btn#followingTab Following
+      .main-tabs(class="flex gap-6 mb-6")
+        button(class="tab-btn active#followersTab text-accent3 bg-container-bg dark:bg-gray-800 p-4 rounded-t-lg cursor-pointer hover:bg-container-bg hover:text-accent active") Followers
+        button(class="tab-btn#followingTab text-accent3 bg-container-bg dark:bg-gray-800 p-4 rounded-t-lg cursor-pointer hover:bg-container-bg hover:text-accent") Following
 
-      .chart-card
-        .follower-chart-wrapper
-          canvas#followerChart
+      .chart-card(class="bg-gray-900 dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8")
+        .follower-chart-wrapper(class="w-full max-w-3xl mx-auto")
+          canvas(id="followerChart" class="w-full h-72")
 
-      .diffs-section#followersContent
+      .diffs-section(id="followersContent")
         each diff in diffs.slice().reverse()
-          .comparison
-            h3 #{diff.from_date} → #{diff.to_date}
-            .diff-row
-              .diff-col
-                h4 Followers Added
+          .comparison(class="bg-container-bg dark:bg-gray-800 border border-input-border rounded-lg p-6 mb-6")
+            h3(class="text-accent dark:text-dark-text font-medium mb-3") #{diff.from_date} → #{diff.to_date}
+            .diff-row(class="flex gap-8 flex-wrap")
+              .diff-col(class="flex-1")
+                h4(class="text-accent2 dark:text-accent font-medium mb-2") Followers Added
                 - const arrAdded = JSON.parse(diff['followers_added'])
                 if arrAdded.length
-                  ul
+                  ul(class="list-none p-0")
                     each user in arrAdded
-                      li #{user}
+                      li(class="text-sm text-text dark:text-dark-text") #{user}
                 else
-                  p None
-              .diff-col
-                h4 Followers Removed
+                  p(class="text-sm") None
+              .diff-col(class="flex-1")
+                h4(class="text-accent2 dark:text-accent font-medium mb-2") Followers Removed
                 - const arrRemoved = JSON.parse(diff['followers_removed'])
                 if arrRemoved.length
-                  ul
+                  ul(class="list-none p-0")
                     each user in arrRemoved
-                      li #{user}
+                      li(class="text-sm text-text dark:text-dark-text") #{user}
                 else
-                  p None
+                  p(class="text-sm") None
 
-      .diffs-section#followingContent(style="display:none;")
+      .diffs-section(id="followingContent" style="display:none;")
         each diff in diffs.slice().reverse()
-          .comparison
-            h3 #{diff.from_date} → #{diff.to_date}
-            .diff-row
-              .diff-col
-                h4 Following Added
+          .comparison(class="bg-container-bg dark:bg-gray-800 border border-input-border rounded-lg p-6 mb-6")
+            h3(class="text-accent dark:text-dark-text font-medium mb-3") #{diff.from_date} → #{diff.to_date}
+            .diff-row(class="flex gap-8 flex-wrap")
+              .diff-col(class="flex-1")
+                h4(class="text-accent2 dark:text-accent font-medium mb-2") Following Added
                 - const arrAdded = JSON.parse(diff['following_added'])
                 if arrAdded.length
-                  ul
+                  ul(class="list-none p-0")
                     each user in arrAdded
-                      li #{user}
+                      li(class="text-sm text-text dark:text-dark-text") #{user}
                 else
-                  p None
-              .diff-col
-                h4 Following Removed
+                  p(class="text-sm") None
+              .diff-col(class="flex-1")
+                h4(class="text-accent2 dark:text-accent font-medium mb-2") Following Removed
                 - const arrRemoved = JSON.parse(diff['following_removed'])
                 if arrRemoved.length
-                  ul
+                  ul(class="list-none p-0")
                     each user in arrRemoved
-                      li #{user}
+                      li(class="text-sm text-text dark:text-dark-text") #{user}
                 else
-                  p None
-
-  .modal#uploadModal
-    .modal-content
-      h3 Upload ZIP files
-      #dropZone Drop files here or click to select
-      input#modalFile(type='file', multiple hidden)
-      .modal-buttons
-        button#cancelBtn(type='button') Cancel
-        button#confirmBtn(type='button', disabled) Confirm upload
+                  p(class="text-sm") None
