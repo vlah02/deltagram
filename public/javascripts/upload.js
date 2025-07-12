@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('uploadModal');
     const dropZone = document.getElementById('dropZone');
@@ -8,6 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const openBtn = document.querySelector('.upload-btn');
 
     let files = [];
+
+    function closeModal() {
+        files = [];
+        fileInput.value = '';
+        dropZone.textContent = 'Drop files here or click to select';
+        confirmBtn.disabled = true;
+        modal.style.display = 'none';
+    }
 
     openBtn.addEventListener('click', () => {
         modal.style.display = 'flex';
@@ -36,13 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         confirmBtn.disabled = files.length === 0;
     });
 
-    cancelBtn.addEventListener('click', () => {
-        files = [];
-        fileInput.value = '';
-        dropZone.textContent = 'Drop files here or click to select';
-        confirmBtn.disabled = true;
-        modal.style.display = 'none';
-    });
+    cancelBtn.addEventListener('click', closeModal);
 
     confirmBtn.addEventListener('click', () => {
         const form = new FormData();
@@ -51,5 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             body: form
         }).then(() => window.location.reload());
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
     });
 });
