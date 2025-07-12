@@ -1,15 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.getElementById('darkModeToggle');
-    toggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('theme', 'dark');
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const iconImg = document.getElementById('themeIcon');
+
+    const icons = {
+        moon: '/images/moon.svg',
+        moonFill: '/images/moon-fill.svg',
+        sun: '/images/sun.svg',
+        sunFill: '/images/sun-fill.svg'
+    };
+
+    let darkMode = localStorage.getItem('theme') === 'dark';
+
+    function updateTheme() {
+        document.body.classList.toggle('dark-mode', darkMode);
+        iconImg.src = darkMode ? icons.sun : icons.moon;
+        iconImg.style.filter = darkMode ? '' : '';
+    }
+    function updateIcon(filled = false) {
+        if (darkMode) {
+            iconImg.src = filled ? icons.sunFill : icons.sun;
         } else {
-            localStorage.setItem('theme', 'light');
+            iconImg.src = filled ? icons.moonFill : icons.moon;
         }
+    }
+
+    updateTheme();
+
+    toggleBtn.addEventListener('click', () => {
+        darkMode = !darkMode;
+        localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+        updateTheme();
     });
 
-    if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark-mode');
-    }
+    toggleBtn.addEventListener('mouseenter', () => updateIcon(true));
+    toggleBtn.addEventListener('mouseleave', () => updateIcon(false));
 });

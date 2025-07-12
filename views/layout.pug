@@ -3,17 +3,23 @@ html
   head
     title Deltagram
     link(rel="icon" href="/images/deltagram-icon.ico" type="image/x-icon")
-    link(rel="stylesheet" href="/stylesheets/style.css")
+    link(rel="stylesheet", href="/stylesheets/style.css")
+
   body
     header
       a(href="/")
-        img.logo(src="/images/deltagram-light.png", alt="Deltagram logo")
-    button#darkModeToggle Dark Mode
+        img.logo(src="/images/deltagram-top.png", alt="Deltagram logo")
 
-    block content
+    button#darkModeToggle.common-btn(type="button" aria-label="Toggle dark mode")
+      img#themeIcon(src="/images/moon.svg" alt="Toggle dark mode" width="28" height="28")
+
+    .main-wrapper
+      block content
 
     if user
-      a#logoutBtn(href="/auth/logout") Logout
+      a#logoutBtn.common-btn(href="/auth/logout" title="Logout")
+        svg(width="28" height="28" viewBox="0 0 24 24")
+          path(fill="currentColor", d="M16 13v-2H7V8l-5 4 5 4v-3zM20 3H10v2h10v14H10v2h10a2 2 0 002-2V5a2 2 0 00-2-2z")
 
     script(src="/javascripts/upload.js")
     script(src="/javascripts/theme.js")
