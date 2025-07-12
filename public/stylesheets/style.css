@@ -7,12 +7,16 @@ html, body {
   color: #262626;
 }
 
+header img.logo {
+  height: 80px;
+  vertical-align: middle;
+}
+
 header {
-  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 1rem 0;
-  text-align: center;
-  font-size: 1.8rem;
-  font-weight: bold;
   border-bottom: 1px solid #DBDBDB;
 }
 
