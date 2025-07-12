@@ -58,8 +58,12 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    req.session.destroy();
-    res.redirect('/auth/login');
+    req.session.destroy(err => {
+        if (err) {
+            console.error(err);
+        }
+        res.redirect('/auth/login');
+    });
 });
 
 module.exports = router;

@@ -5,6 +5,7 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: #FAFAFA;
   color: #262626;
+  position: relative;
 }
 
 header img.logo {
@@ -322,4 +323,35 @@ ul.diff-list li {
 #confirmBtn:disabled {
   background: #b3dffc;
   cursor: not-allowed;
+}
+
+#darkModeToggle {
+  position: absolute;
+  top: 120px;
+  right: 20px;
+  background: #0095F6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#darkModeToggle:hover {
+  background: #007bbf;
+}
+
+#logoutBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0.5rem 1rem;
+  background: #C13584;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+#logoutBtn:hover {
+  background: #A52F6E;
 }
