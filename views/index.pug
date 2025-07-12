@@ -1,60 +1,39 @@
 extends layout
 
 block content
-  h1 Welcome #{user.username}
+  .container
+    aside
+      h3 Uploaded Zips
+      ul.upload-list
+        each file in files
+          li
+            span.file-name #{file.filename} (#{file.date || file.created_at})
+            form(method="POST", action=`/upload/delete/${file.id}`)
+              button.delete-btn(type="submit") ✕
+      button.upload-btn Upload
 
-  form(method='POST', action='/upload', enctype='multipart/form-data')
-    input(type='file', name='zipfiles', multiple)
-    button(type='submit') Upload Zip
+    main.main-content
+      each diff in diffs
+        .comparison
+          h3 #{diff.from_date} → #{diff.to_date}
 
-  aside
-    h3 Your uploaded zips
-    ul
-      each u in uploads
-        li
-          | #{u.filename} (#{new Date(u.created_at).toISOString().split('T')[0]})
-          form(method='POST', action=`/upload/delete/${u.id}`)
-            button(type='submit') Delete
+          - ['Followers Added', 'Followers Removed', 'Following Added', 'Following Removed'].forEach(label => {
+            - const key = label.toLowerCase().replace(/ /g, '_');
+            h4 #{label}
+            - const arr = JSON.parse(diff[key])
+            if arr.length
+              ul
+                each user in arr
+                  li #{user}
+            else
+              p None
+          - })
 
-  each diff in diffs
-    - var fromDate = new Date(diff.from_date).toISOString().split('T')[0]
-    - var toDate = new Date(diff.to_date).toISOString().split('T')[0]
-    h2 Comparison: #{fromDate} → #{toDate}
-
-    h3 Followers Added
-    - var fa = JSON.parse(diff.followers_added || "[]")
-    if fa.length > 0
-      ul
-        each name in fa
-          li= name
-    else
-      p None
-
-    h3 Followers Removed
-    - var fr = JSON.parse(diff.followers_removed || "[]")
-    if fr.length > 0
-      ul
-        each name in fr
-          li= name
-    else
-      p None
-
-    h3 Following Added
-    - var foa = JSON.parse(diff.following_added || "[]")
-    if foa.length > 0
-      ul
-        each name in foa
-          li= name
-    else
-      p None
-
-    h3 Following Removed
-    - var forr = JSON.parse(diff.following_removed || "[]")
-    if forr.length > 0
-      ul
-        each name in forr
-          li= name
-    else
-      p None
-
-    hr
+  .modal#uploadModal
+    .modal-content
+      h3 Upload ZIP files
+      #dropZone Drop files here or click to select
+      input#modalFile(type='file', multiple hidden)
+      .modal-buttons
+        button#cancelBtn(type='button') Cancel
+        button#confirmBtn(type='button', disabled) Confirm upload
