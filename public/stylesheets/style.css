@@ -525,16 +525,26 @@ body.dark-mode .tab-btn:hover {
   color: var(--accent3);
 }
 
+.chart-card {
+  background: #232327;   /* Dark background, match your theme */
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.15), 0 1.5px 4px rgba(64,93,230,0.09);
+  padding: 2rem 1.5rem;
+  margin-bottom: 2.5rem;
+  margin-top: 1rem;
+  max-width: 820px;      /* Match your container/cards */
+  margin-left: auto;
+  margin-right: auto;
+  transition: box-shadow 0.2s;
+  border: 1.5px solid #27273a;
+}
 .follower-chart-wrapper {
-  max-width: 700px;
-  margin: 2rem auto 1.5rem auto;
-  background: var(--container-bg);
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.07);
-  padding: 1.2rem 2rem 1.2rem 2rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 #followerChart {
   width: 100% !important;
-  height: 260px !important;
+  height: 300px !important;
   display: block;
 }

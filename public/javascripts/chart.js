@@ -18,7 +18,19 @@ document.addEventListener('DOMContentLoaded', function () {
             }]
         },
         options: {
-            plugins: { legend: { display: false } },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${context.parsed.y}`;
+                        }
+                    }
+                }
+            },
             responsive: true,
             scales: { y: { beginAtZero: false } }
         }

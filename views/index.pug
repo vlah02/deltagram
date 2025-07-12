@@ -16,12 +16,13 @@ block content
       script.
         window.followHistory = !{JSON.stringify(history)};
 
-      .follower-chart-wrapper
-        canvas#followerChart(width="100%" height="60")
-
       .main-tabs
         button.tab-btn.active#followersTab Followers
         button.tab-btn#followingTab Following
+
+      .chart-card
+        .follower-chart-wrapper
+          canvas#followerChart
 
       .diffs-section#followersContent
         each diff in diffs.slice().reverse()
