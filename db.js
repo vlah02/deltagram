@@ -10,13 +10,15 @@ db.serialize(() => {
     )
   `);
 
-    db.run(`
+  db.run(`
     CREATE TABLE IF NOT EXISTS uploads (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       user_id INTEGER,
       filename TEXT,
       created_at TEXT,
-      file_hash TEXT
+      file_hash TEXT,
+      followers_count INTEGER DEFAULT 0,
+      following_count INTEGER DEFAULT 0
     )
   `);
 

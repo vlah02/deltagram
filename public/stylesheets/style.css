@@ -524,3 +524,17 @@ body.dark-mode .tab-btn:hover {
   background: var(--container-bg);
   color: var(--accent3);
 }
+
+.follower-chart-wrapper {
+  max-width: 700px;
+  margin: 2rem auto 1.5rem auto;
+  background: var(--container-bg);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+  padding: 1.2rem 2rem 1.2rem 2rem;
+}
+#followerChart {
+  width: 100% !important;
+  height: 260px !important;
+  display: block;
+}
