@@ -1,0 +1,60 @@
+extends layout
+
+block content
+  h1 Welcome #{user.username}
+
+  form(method='POST', action='/upload', enctype='multipart/form-data')
+    input(type='file', name='zipfiles', multiple)
+    button(type='submit') Upload Zip
+
+  aside
+    h3 Your uploaded zips
+    ul
+      each u in uploads
+        li
+          | #{u.filename} (#{new Date(u.created_at).toISOString().split('T')[0]})
+          form(method='POST', action=`/upload/delete/${u.id}`)
+            button(type='submit') Delete
+
+  each diff in diffs
+    - var fromDate = new Date(diff.from_date).toISOString().split('T')[0]
+    - var toDate = new Date(diff.to_date).toISOString().split('T')[0]
+    h2 Comparison: #{fromDate} → #{toDate}
+
+    h3 Followers Added
+    - var fa = JSON.parse(diff.followers_added || "[]")
+    if fa.length > 0
+      ul
+        each name in fa
+          li= name
+    else
+      p None
+
+    h3 Followers Removed
+    - var fr = JSON.parse(diff.followers_removed || "[]")
+    if fr.length > 0
+      ul
+        each name in fr
+          li= name
+    else
+      p None
+
+    h3 Following Added
+    - var foa = JSON.parse(diff.following_added || "[]")
+    if foa.length > 0
+      ul
+        each name in foa
+          li= name
+    else
+      p None
+
+    h3 Following Removed
+    - var forr = JSON.parse(diff.following_removed || "[]")
+    if forr.length > 0
+      ul
+        each name in forr
+          li= name
+    else
+      p None
+
+    hr

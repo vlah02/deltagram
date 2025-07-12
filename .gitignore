@@ -1,0 +1,29 @@
+# Node modules
+node_modules/
+
+# Uploaded temp files (Multer)
+uploads/
+
+# Extracted data folders (unzipped Instagram zips)
+data/
+
+# SQLite DB file
+*.sqlite
+*.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Environment variables, if you ever add .env
+.env
+.env.*
+
+# IntelliJ / WebStorm / IDEA
+.idea/
+*.iml
