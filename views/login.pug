@@ -1,12 +1,30 @@
 extends layout
 
 block content
-  .auth-container(class="w-80 mx-auto my-20 p-8 bg-container-bg dark:bg-dark-header-bg border border-input-border rounded-lg shadow-lg text-center")
-    h2(class="text-accent dark:text-dark-text text-2xl font-semibold mb-6") Login
-    form(action='/auth/login', method='POST')
-      input(type='text', name='username', placeholder='Username', required class='w-full p-3 mb-4 border border-input-border rounded-md bg-input-bg text-text dark:bg-gray-700 dark:text-dark-text')
-      input(type='password', name='password', placeholder='Password', required class='w-full p-3 mb-4 border border-input-border rounded-md bg-input-bg text-text dark:bg-gray-700 dark:text-dark-text')
-      button(type='submit', class='w-full p-3 bg-accent2 text-white font-medium rounded-md cursor-pointer mb-4 transition-colors hover:bg-accent2-hover') Log In
-    p(class="text-sm")
-      | Don't have an account?
-      a(href='/auth/register', class='text-accent2 hover:text-accent') Sign up
+  div(class="auth-container w-80 mx-auto my-20 p-8 bg-container-bg dark:bg-dark-header-bg border border-input-border rounded-lg shadow-lg text-center")
+    h2(class="text-accent2 dark:text-accent2 text-3xl font-bold mb-8 select-none cursor-default") Login
+    form(action="/auth/login" method="POST")
+      input(
+        type="text"
+        name="username"
+        placeholder="Username"
+        required
+        class="w-full p-3 mb-4 border border-input-border rounded-md bg-input-bg text-text dark:bg-gray-700 dark:text-dark-text"
+      )
+      input(
+        type="password"
+        name="password"
+        placeholder="Password"
+        required
+        class="w-full p-3 mb-4 border border-input-border rounded-md bg-input-bg text-text dark:bg-gray-700 dark:text-dark-text"
+      )
+      button(
+        type="submit"
+        class="w-full p-3 bg-accent2 text-white font-medium rounded-md cursor-pointer mb-6 transition-colors hover:bg-accent2-hover"
+      ) Log In
+    p(class="text-sm flex justify-center items-center select-none")
+      span.select-none Don't have an account?
+      a(
+        href="/auth/register"
+        class="ml-2 text-accent2 hover:text-accent2-hover select-none"
+      ) Sign up
