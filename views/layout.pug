@@ -38,14 +38,14 @@ html
     .main-wrapper
       block content
 
-    // logout (if logged in)
+    // logout (if logged in) — now styled just like the dark-mode toggle
     if user
       a#logoutBtn(
-        class="common-btn absolute bottom-5 right-5 bg-accent2 rounded-full w-14 h-14 flex items-center justify-center shadow-lg transition-all cursor-pointer z-10"
         href="/auth/logout"
         title="Logout"
+        class="fixed bottom-8 right-8 bg-accent2 hover:bg-accent2-hover text-white rounded-lg w-12 h-12 flex items-center justify-center shadow-lg transition-colors duration-200 cursor-pointer z-50"
       )
-        svg(width="28" height="28" viewBox="0 0 24 24")
+        svg(width="24" height="24" viewBox="0 0 24 24")
           path(fill="currentColor" d="M16 13v-2H7V8l-5 4 5 4v-3zM20 3H10v2h10v14H10v2h10a2 2 0 002-2V5a2 2 0 00-2-2z")
 
     // scripts

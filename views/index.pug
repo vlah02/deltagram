@@ -1,8 +1,8 @@
 extends layout
 
 block content
-  .container(class="flex gap-6 max-w-7xl mx-auto py-8")
-    aside(class="w-64 bg-sidebar-bg dark:bg-dark-sidebar-bg p-4 pb-6 border border-sidebar-border dark:border-dark-sidebar-border rounded-lg shadow-lg")
+  .container(class="flex items-start gap-6 max-w-7xl mx-auto py-8")
+    aside(class="w-64 bg-container-bg dark:bg-dark-container-bg p-4 pb-6 rounded-lg shadow-lg")
       h3(class="text-text dark:text-dark-text text-lg font-semibold mb-4") Uploaded Zips
       ul(class="upload-list list-none p-0 mb-6")
         each file in files
@@ -11,19 +11,18 @@ block content
               | #{file.filename} (#{file.date || file.created_at})
             form(method="POST", action=`/upload/delete/${file.id}`)
               button(class="delete-btn text-danger text-lg font-bold leading-none p-0") ✕
-      button(class="upload-btn w-full py-3 bg-accent text-white font-medium rounded-md cursor-pointer transition-colors hover:bg-accent-hover") Upload
+      button(class="upload-btn w-full py-3 bg-accent2 hover:bg-accent2-hover text-white font-medium rounded-md cursor-pointer transition-colors") Upload
 
     main(class="main-content flex-1")
       script.
         window.followHistory = !{JSON.stringify(history)}
 
       .main-tabs(class="flex gap-6 mb-6")
-        button(class="tab-btn active#followersTab text-accent3 bg-container-bg dark:bg-gray-800 p-4 rounded-t-lg cursor-pointer hover:bg-container-bg hover:text-accent active") Followers
-        button(class="tab-btn#followingTab text-accent3 bg-container-bg dark:bg-gray-800 p-4 rounded-t-lg cursor-pointer hover:bg-container-bg hover:text-accent") Following
+        button(class="tab-btn active#followersTab text-accent3 bg-container-bg dark:bg-gray-800 p-4 rounded-t-lg cursor-pointer hover:bg-container-bg active") Followers
+        button(class="tab-btn#followingTab text-accent3 bg-container-bg dark:bg-gray-800 p-4 rounded-t-lg cursor-pointer hover:bg-container-bg") Following
 
-      .chart-card(class="bg-gray-900 dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8")
-        .follower-chart-wrapper(class="w-full max-w-3xl mx-auto")
-          canvas(id="followerChart" class="w-full h-72")
+      .chart-card(class="bg-container-bg dark:bg-dark-container-bg rounded-lg shadow-lg p-6 mb-8 max-w-3xl mx-auto")
+        canvas(id="followerChart" class="h-72")
 
       .diffs-section(id="followersContent")
         each diff in diffs.slice().reverse()

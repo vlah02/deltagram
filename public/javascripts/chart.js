@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const data = window.followHistory || [];
     const ctx = document.getElementById('followerChart').getContext('2d');
     const dateLabels = data.map(d => d.date);
+    const accent2 = getComputedStyle(document.documentElement)
+        .getPropertyValue('--accent2')
+        .trim() || '#F56040';
 
     let currentType = 'followers';
     let chart = new Chart(ctx, {
@@ -11,10 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
             datasets: [{
                 label: 'Followers',
                 data: data.map(d => d.followers),
-                borderColor: '#405DE6',
-                backgroundColor: 'rgba(64,93,230,0.07)',
+                borderColor: accent2,
+                backgroundColor: accent2 + '33',
+                pointBackgroundColor: accent2,
+                pointBorderColor: accent2,
                 fill: true,
-                tension: 0.2,
+                tension: 0.4,
             }]
         },
         options: {
