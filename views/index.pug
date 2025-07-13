@@ -39,20 +39,20 @@ block content
                   h3(class="text-accent2 text-lg font-semibold mb-2 select-none") Added
                   - const added = JSON.parse(diff['followers_added'])
                   if added.length
-                    ul(class="list-none p-0 space-y-1")
+                    ul(class="list-disc list-inside space-y-1 pl-4")
                       each user in added
                         li(class="text-sm text-text dark:text-dark-text select-none") #{user}
                   else
-                    p(class="text-sm text-text dark:text-dark-text select-none")
+                    p(class="text-sm text-text dark:text-dark-text select-none") None
                 .removed(class="bg-accent2/10 dark:bg-accent2/20 p-4 rounded-lg")
                   h3(class="text-accent2 text-lg font-semibold mb-2 select-none") Removed
                   - const removed = JSON.parse(diff['followers_removed'])
                   if removed.length
-                    ul(class="list-none p-0 space-y-1")
+                    ul(class="list-disc list-inside space-y-1 pl-4")
                       each user in removed
                         li(class="text-sm text-text dark:text-dark-text select-none") #{user}
                   else
-                    p(class="text-sm text-text dark:text-dark-text select-none")
+                    p(class="text-sm text-text dark:text-dark-text select-none") None
 
         .diffs-section(id="followingContent" style="display:none;")
           each diff in diffs.slice().reverse()
@@ -63,7 +63,7 @@ block content
                   h3(class="text-accent2 text-lg font-semibold mb-2 select-none") Added
                   - const addedF = JSON.parse(diff['following_added'])
                   if addedF.length
-                    ul(class="list-none p-0 space-y-1")
+                    ul(class="list-disc list-inside space-y-1 pl-4")
                       each user in addedF
                         li(class="text-sm text-text dark:text-dark-text select-none") #{user}
                   else
@@ -72,7 +72,7 @@ block content
                   h3(class="text-accent2 text-lg font-semibold mb-2 select-none") Removed
                   - const removedF = JSON.parse(diff['following_removed'])
                   if removedF.length
-                    ul(class="list-none p-0 space-y-1")
+                    ul(class="list-disc list-inside space-y-1 pl-4")
                       each user in removedF
                         li(class="text-sm text-text dark:text-dark-text select-none") #{user}
                   else
