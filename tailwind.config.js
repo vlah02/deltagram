@@ -3,14 +3,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bg: '#FAFAFA',
-        'dark-bg': '#18191a',
+        bg: '#F0F0F0',
+        'dark-bg': '#161616',
         text: '#262626',
         'dark-text': '#E1E1E1',
-        'header-bg': '#fff',
-        'dark-header-bg': '#242526',
+        'header-bg': '#E0E0E0',
+        'dark-header-bg': '#1f1f1f',
         'sidebar-bg': '#fff',
         'dark-sidebar-bg': '#242526',
+        'input-bg': '#F0F0F0',
+        'container-bg': '#E0E0E0',
+        'dark-container-bg': '#1f1f1f',
         'modal-bg': '#fff',
         'dark-modal-bg': '#333',
         accent: '#405DE6',

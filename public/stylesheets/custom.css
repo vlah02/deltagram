@@ -1,23 +1,20 @@
-/* before */
 :root {
-    --bg: #FAFAFA;
+    --bg: #F0F0F0;
     --text: #262626;
 }
 
-/* html.dark { … }  ← this never fires, since we toggle dark on <body> */
 html.dark {
     --bg: #18191a;
     --text: #E1E1E1;
 }
 
-/* after */
 body.dark {
     --bg: #18191a;
     --text: #E1E1E1;
 }
 
 :root {
-    --bg: #FAFAFA;
+    --bg: #F0F0F0;
     --text: #262626;
 }
 

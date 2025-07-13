@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateTheme() {
-        document.body.classList.toggle('dark', darkMode);
+        document.documentElement.classList.toggle('dark', darkMode);
         updateIcon();
     }
 
