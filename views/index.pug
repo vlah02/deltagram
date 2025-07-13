@@ -43,7 +43,7 @@ block content
                       each user in added
                         li(class="text-sm text-text dark:text-dark-text select-none") #{user}
                   else
-                    p(class="text-sm text-text dark:text-dark-text select-none") None
+                    p(class="text-sm text-text dark:text-dark-text select-none")
                 .removed(class="bg-accent2/10 dark:bg-accent2/20 p-4 rounded-lg")
                   h3(class="text-accent2 text-lg font-semibold mb-2 select-none") Removed
                   - const removed = JSON.parse(diff['followers_removed'])
@@ -52,7 +52,7 @@ block content
                       each user in removed
                         li(class="text-sm text-text dark:text-dark-text select-none") #{user}
                   else
-                    p(class="text-sm text-text dark:text-dark-text select-none") None
+                    p(class="text-sm text-text dark:text-dark-text select-none")
 
         .diffs-section(id="followingContent" style="display:none;")
           each diff in diffs.slice().reverse()
