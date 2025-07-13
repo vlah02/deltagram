@@ -12,21 +12,20 @@ html
         } catch (e) {
         }
       })();
+
     link(rel="icon" href="/images/deltagram-icon.ico" type="image/x-icon")
     link(rel="stylesheet", href="/stylesheets/tailwind.css")
     link(rel="stylesheet", href="/stylesheets/style.css")
     link(rel="stylesheet", href="/stylesheets/custom.css")
 
   body(class="bg-[var(--bg)] text-[var(--text)] font-sans dark:bg-[var(--dark - bg)] dark:text-[var(--dark-text)] transition-colors duration-300 ease-in-out")
-    // header
     header(class="flex justify-center items-center p-4 bg-header-bg dark:bg-dark-header-bg transition-colors duration-300 ease-in-out")
       a(href="/")
         img.logo(src="/images/deltagram-top.png" alt="Deltagram logo" class="h-20 align-middle")
 
-    // fixed dark-mode toggle button
     button#darkModeToggle(
       class="fixed top-32 right-8 bg-accent2 hover:bg-accent2-hover text-white rounded-lg w-12 h-12 flex items-center justify-center shadow-lg transition-colors duration-200 cursor-pointer z-50"
-    title="Toggle dark mode"
+      title="Toggle dark mode"
     )
       img#themeIcon(
         src="/images/moon.svg"
@@ -34,11 +33,10 @@ html
         width="24"
         height="24"
       )
-    // main content
+
     .main-wrapper
       block content
 
-    // logout (if logged in) — now styled just like the dark-mode toggle
     if user
       a#logoutBtn(
         href="/auth/logout"
@@ -48,7 +46,6 @@ html
         svg(width="24" height="24" viewBox="0 0 24 24")
           path(fill="currentColor" d="M16 13v-2H7V8l-5 4 5 4v-3zM20 3H10v2h10v14H10v2h10a2 2 0 002-2V5a2 2 0 00-2-2z")
 
-    // scripts
     script(src="/javascripts/upload.js")
     script(src="/javascripts/theme.js")
     script(src="/javascripts/tabs.js")

@@ -2,72 +2,77 @@ extends layout
 
 block content
   .container(class="flex items-start gap-6 max-w-7xl mx-auto py-8")
-    aside(class="w-64 bg-container-bg dark:bg-dark-container-bg p-4 pb-6 rounded-lg shadow-lg")
-      h3(class="text-text dark:text-dark-text text-lg font-semibold mb-4") Uploaded Zips
+    aside(class="w-64 bg-container-bg dark:bg-dark-container-bg p-4 rounded-lg shadow-lg transition-colors duration-300 ease-in-out")
+      h3(class="text-text dark:text-dark-text text-lg font-semibold mb-4 pl-2 select-none") Uploaded Zips
       ul(class="upload-list list-none p-0 mb-6")
         each file in files
-          li(class="flex justify-between items-center border-b border-gray-300 py-2 dark:border-gray-700")
-            span(class="file-name flex-1 text-sm text-text dark:text-dark-text break-words leading-5")
+          li(class="flex justify-between items-center py-2 px-2 hover:bg-container-hover dark:hover:bg-dark-container-hover hover:rounded-md transition-all duration-150 select-none")
+            span(class="file-name flex-1 text-sm text-text dark:text-dark-text break-words leading-5 select-none")
               | #{file.filename} (#{file.date || file.created_at})
-            form(method="POST", action=`/upload/delete/${file.id}`)
-              button(class="delete-btn text-danger text-lg font-bold leading-none p-0") ✕
-      button(class="upload-btn w-full py-3 bg-accent2 hover:bg-accent2-hover text-white font-medium rounded-md cursor-pointer transition-colors") Upload
+            form(method="POST" action=`/upload/delete/${file.id}`)
+              button(
+                type="submit"
+                title="Delete this zip"
+                class="w-8 h-8 inline-flex items-center justify-center text-danger hover:text-danger-hover bg-transparent hover:bg-danger/10 rounded-full select-none"
+              ) ✕
+      button(class="upload-btn w-full py-3 bg-accent2 hover:bg-accent2-hover text-white font-medium rounded-md cursor-pointer select-none") Upload
 
     main(class="main-content flex-1")
       script.
         window.followHistory = !{JSON.stringify(history)}
 
       .main-tabs(class="flex gap-6 mb-6")
-        button(class="tab-btn active#followersTab text-accent3 bg-container-bg dark:bg-gray-800 p-4 rounded-t-lg cursor-pointer hover:bg-container-bg active") Followers
-        button(class="tab-btn#followingTab text-accent3 bg-container-bg dark:bg-gray-800 p-4 rounded-t-lg cursor-pointer hover:bg-container-bg") Following
+        button#followersTab(class="bg-container-bg dark:bg-dark-container-bg text-text dark:text-dark-text p-4 rounded-lg cursor-pointer hover:bg-container-hover dark:hover:bg-dark-container-hover transition-colors duration-300 ease-in-out") Followers
+        button#followingTab(class="bg-container-bg dark:bg-dark-container-bg text-text dark:text-dark-text p-4 rounded-lg cursor-pointer hover:bg-container-hover dark:hover:bg-dark-container-hover transition-colors duration-300 ease-in-out") Following
 
-      .chart-card(class="bg-container-bg dark:bg-dark-container-bg rounded-lg shadow-lg p-6 mb-8 max-w-3xl mx-auto")
+      .chart-card(class="bg-container-bg dark:bg-dark-container-bg rounded-lg shadow-lg p-6 mb-8 max-w-3xl transition-colors duration-300 ease-in-out")
         canvas(id="followerChart" class="h-72")
 
-      .diffs-section(id="followersContent")
-        each diff in diffs.slice().reverse()
-          .comparison(class="bg-container-bg dark:bg-gray-800 border border-input-border rounded-lg p-6 mb-6")
-            h3(class="text-accent dark:text-dark-text font-medium mb-3") #{diff.from_date} → #{diff.to_date}
-            .diff-row(class="flex gap-8 flex-wrap")
-              .diff-col(class="flex-1")
-                h4(class="text-accent2 dark:text-accent font-medium mb-2") Followers Added
-                - const arrAdded = JSON.parse(diff['followers_added'])
-                if arrAdded.length
-                  ul(class="list-none p-0")
-                    each user in arrAdded
-                      li(class="text-sm text-text dark:text-dark-text") #{user}
-                else
-                  p(class="text-sm") None
-              .diff-col(class="flex-1")
-                h4(class="text-accent2 dark:text-accent font-medium mb-2") Followers Removed
-                - const arrRemoved = JSON.parse(diff['followers_removed'])
-                if arrRemoved.length
-                  ul(class="list-none p-0")
-                    each user in arrRemoved
-                      li(class="text-sm text-text dark:text-dark-text") #{user}
-                else
-                  p(class="text-sm") None
+      .diffs-wrapper(class="max-w-3xl space-y-6")
+        .diffs-section(id="followersContent")
+          each diff in diffs.slice().reverse()
+            .comparison(class="bg-container-bg dark:bg-dark-container-bg rounded-lg p-6 mb-6 transition-colors duration-300 ease-in-out")
+              h2(class="text-accent2 text-2xl font-black mb-2 select-none") #{diff.from_date} → #{diff.to_date}
+              .diff-row(class="flex gap-8 flex-wrap")
+                .diff-col(class="flex-1")
+                  h3(class="text-accent2 text-lg font-bold mb-2 select-none") Followers Added
+                  - const arrAdded = JSON.parse(diff['followers_added'])
+                  if arrAdded.length
+                    ul(class="list-none p-0")
+                      each user in arrAdded
+                        li(class="text-sm text-text dark:text-dark-text") #{user}
+                  else
+                    p(class="text-sm") None
+                .diff-col(class="flex-1")
+                  h3(class="text-accent2 text-lg font-bold mb-2 select-none") Followers Removed
+                  - const arrRemoved = JSON.parse(diff['followers_removed'])
+                  if arrRemoved.length
+                    ul(class="list-none p-0")
+                      each user in arrRemoved
+                        li(class="text-sm text-text dark:text-dark-text") #{user}
+                  else
+                    p(class="text-sm") None
 
-      .diffs-section(id="followingContent" style="display:none;")
-        each diff in diffs.slice().reverse()
-          .comparison(class="bg-container-bg dark:bg-gray-800 border border-input-border rounded-lg p-6 mb-6")
-            h3(class="text-accent dark:text-dark-text font-medium mb-3") #{diff.from_date} → #{diff.to_date}
-            .diff-row(class="flex gap-8 flex-wrap")
-              .diff-col(class="flex-1")
-                h4(class="text-accent2 dark:text-accent font-medium mb-2") Following Added
-                - const arrAdded = JSON.parse(diff['following_added'])
-                if arrAdded.length
-                  ul(class="list-none p-0")
-                    each user in arrAdded
-                      li(class="text-sm text-text dark:text-dark-text") #{user}
-                else
-                  p(class="text-sm") None
-              .diff-col(class="flex-1")
-                h4(class="text-accent2 dark:text-accent font-medium mb-2") Following Removed
-                - const arrRemoved = JSON.parse(diff['following_removed'])
-                if arrRemoved.length
-                  ul(class="list-none p-0")
-                    each user in arrRemoved
-                      li(class="text-sm text-text dark:text-dark-text") #{user}
-                else
-                  p(class="text-sm") None
+        .diffs-section(id="followingContent" style="display:none;")
+          each diff in diffs.slice().reverse()
+            .comparison(class="bg-container-bg dark:bg-dark-container-bg rounded-lg p-6 mb-6 transition-colors duration-300 ease-in-out")
+              h2(class="text-accent2 text-2xl font-black mb-2 select-none") #{diff.from_date} → #{diff.to_date}
+              .diff-row(class="flex gap-8 flex-wrap")
+                .diff-col(class="flex-1")
+                  h3(class="text-accent2 text-lg font-bold mb-2") Following Added
+                  - const arrAdded = JSON.parse(diff['following_added'])
+                  if arrAdded.length
+                    ul(class="list-none p-0")
+                      each user in arrAdded
+                        li(class="text-sm text-text dark:text-dark-text") #{user}
+                  else
+                    p(class="text-sm") None
+                .diff-col(class="flex-1")
+                  h3(class="text-accent2 text-lg font-bold mb-2 select-none") Following Removed
+                  - const arrRemoved = JSON.parse(diff['following_removed'])
+                  if arrRemoved.length
+                    ul(class="list-none p-0")
+                      each user in arrRemoved
+                        li(class="text-sm text-text dark:text-dark-text") #{user}
+                  else
+                    p(class="text-sm") None
