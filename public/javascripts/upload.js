@@ -17,6 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     openBtn.addEventListener('click', () => {
+        files = [];
+        fileInput.value = '';
+        dropZone.textContent = 'Drop files here or click to select';
+        confirmBtn.disabled = true;
+
         modal.style.display = 'flex';
     });
 
