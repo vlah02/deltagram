@@ -35,7 +35,7 @@ block content
             .comparison(class="bg-container-bg dark:bg-dark-container-bg rounded-lg p-6 mb-6 transition-colors duration-300 ease-in-out")
               h2(class="text-accent2 text-2xl font-black mb-4 select-none") #{diff.from_date} → #{diff.to_date}
               div(class="grid grid-cols-1 md:grid-cols-2 gap-6")
-                .added(class="bg-accent2/10 dark:bg-accent2/20 p-4 rounded-lg")
+                .added(class="bg-accent2/20 dark:bg-accent2/10 p-4 rounded-lg")
                   h3(class="text-accent2 text-lg font-semibold mb-2 select-none") Added
                   - const added = JSON.parse(diff['followers_added'])
                   if added.length
@@ -44,7 +44,7 @@ block content
                         li(class="text-sm text-text dark:text-dark-text select-none") #{user}
                   else
                     p(class="text-sm text-text dark:text-dark-text select-none")
-                .removed(class="bg-accent2/10 dark:bg-accent2/20 p-4 rounded-lg")
+                .removed(class="bg-accent2/20 dark:bg-accent2/10 p-4 rounded-lg")
                   h3(class="text-accent2 text-lg font-semibold mb-2 select-none") Removed
                   - const removed = JSON.parse(diff['followers_removed'])
                   if removed.length
@@ -59,7 +59,7 @@ block content
             .comparison(class="bg-container-bg dark:bg-dark-container-bg rounded-lg p-6 mb-6 transition-colors duration-300 ease-in-out")
               h2(class="text-accent2 text-2xl font-black mb-4 select-none") #{diff.from_date} → #{diff.to_date}
               div(class="grid grid-cols-1 md:grid-cols-2 gap-6")
-                .added(class="bg-accent2/10 dark:bg-accent2/20 p-4 rounded-lg")
+                .added(class="bg-accent2/20 dark:bg-accent2/10 p-4 rounded-lg")
                   h3(class="text-accent2 text-lg font-semibold mb-2 select-none") Added
                   - const addedF = JSON.parse(diff['following_added'])
                   if addedF.length
@@ -68,7 +68,7 @@ block content
                         li(class="text-sm text-text dark:text-dark-text select-none") #{user}
                   else
                     p(class="text-sm text-text dark:text-dark-text select-none")
-                .removed(class="bg-accent2/10 dark:bg-accent2/20 p-4 rounded-lg")
+                .removed(class="bg-accent2/20 dark:bg-accent2/10 p-4 rounded-lg")
                   h3(class="text-accent2 text-lg font-semibold mb-2 select-none") Removed
                   - const removedF = JSON.parse(diff['following_removed'])
                   if removedF.length
@@ -77,3 +77,20 @@ block content
                         li(class="text-sm text-text dark:text-dark-text select-none") #{user}
                   else
                     p(class="text-sm text-text dark:text-dark-text select-none")
+
+    div#uploadModal(class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden")
+      div(class="modal-content bg-bg dark:bg-dark-bg rounded-lg p-8 w-11/12 max-w-md text-center shadow-modal transition-colors duration-300 ease-in-out")
+        h3(class="text-text dark:text-dark-text text-xl font-semibold mb-4") Upload ZIP files
+        div#dropZone(class="border-2 border-black/10 dark:border-white/40 rounded-md h-40 flex items-center justify-center text-black/40 dark:text-white/40 cursor-pointer bg-dropzone-bg dark:bg-dark-dropzone-bg transition-colors duration-300 ease-in-out")
+          | Drop files here or click to select
+        input#modalFile(type="file" multiple hidden)
+        div(class="modal-buttons flex justify-between mt-6")
+          button#cancelBtn(
+            type="button"
+            class="px-4 py-2 bg-container-bg hover:bg-container-hover dark:bg-dark-container-bg dark:hover:bg-dark-container-hover text-text dark:text-dark-text rounded-md transition-colors duration-300 ease-in-out"
+          ) Cancel
+          button#confirmBtn(
+            type="button"
+            disabled
+            class="px-4 py-2 bg-accent2 hover:bg-accent2-hover disabled:hover:bg-accent2 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-md transition-colors duration-300 ease-in-out"
+          ) Confirm
