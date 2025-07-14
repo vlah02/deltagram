@@ -1,25 +1,23 @@
 # Deltagram
 
-**Deltagram** is a web application for comparing your Instagram Followers and Following lists over time. It allows you to visually see who unfollowed you, who started following you, and how your connections changed between two or more data snapshots exported from Instagram.
+**Deltagram** is a self-hosted web app for comparing your Instagram Followers and Following lists over time. It lets you upload multiple Instagram data ZIPs, then visually inspect who you gained or lost in each interval.
 
 ---
 
-## Features
+## 🚀 Features
 
-- 📦 **Upload multiple Instagram ZIPs** downloaded from Account Center
-- 🗓 **Compare two or more time points**—see changes over time
-- 👥 **Followers vs Following**: Easily switch between “Followers” and “Following” comparison tabs
-- 🟢 **See “Added” and “Removed” side by side** for each time range
-- 🌙 **Dark Mode** support (auto theme switching)
-- 📊 **Clean UI** with clear, grouped diff results
+- 📦 **Upload ZIPs in a modal** — click **Upload** to open a drag-and-drop dialog
+- 🖱️ **Drag-and-drop** or click to select files
+- 🛑 **Confirm button stays disabled** until at least one file is chosen
+- 🗓 **Compare any number of snapshots** — see every consecutive diff
+- 👥 **Toggle Followers vs. Following** in one click
+- 🟢 **Side-by-side “Added” & “Removed” panels** per date range
+- 🌙 **Dark Mode** with smooth, synced transitions
+- 🎨 **Tailwind CSS** + Pug templates for a clean, responsive UI
 
 ---
 
-## How to Get Your Instagram Data ZIPs
-
-To use Deltagram, you need to **download your followers/following data** from Instagram’s Account Center **at two or more points in time**.
-
-**Follow these steps:**
+## 📂 How to Get Your Instagram Data ZIPs
 
 1. Go to [Instagram Account Center](https://www.instagram.com/accounts/center/)
 2. Click **“Your information and permissions”**
@@ -40,43 +38,46 @@ To use Deltagram, you need to **download your followers/following data** from In
 
 ---
 
-## Usage
+## 🖥️ Usage
 
-1. **Upload** two or more ZIP files on the main page
-2. The app will **parse your followers/following lists** for each snapshot
-3. Switch between the **Followers** and **Following** tabs to see changes
-4. For each time interval, you’ll see **Added** and **Removed** side by side
+1. **Click “Upload”** — a modal pops up.
+2. **Drag & drop** one or more ZIPs (or click to browse).
+3. **Confirm** (button only enables once files are selected).
+4. After upload, switch between **Followers** and **Following** tabs.
+5. Scroll down to see each **date-range card** with two columns:
+   - **Added**
+   - **Removed**
 
 ---
 
-## Example
+## 🔍 Example
 
 ```text
 2023-01-01 → 2023-04-01
 
-[Followers Added]    [Followers Removed]
-• alice              • charlie
+[Added]               [Removed]
+• alice               • charlie
 • bob
 
 2023-04-01 → 2023-07-01
 
-[Followers Added]    [Followers Removed]
-• dave               • alice
+[Added]               [Removed]
+• dave                • alice
 ```
 
 ---
 
-## Technical Overview
+## 🛠️ Technical Overview
 
-- **Frontend:** Pug/Jade templating, custom CSS
-- **Backend:** Node.js/Express
-- **ZIP parsing:** Reads Instagram’s exported JSON format, extracts and compares arrays
-- **Comparison logic:** Shows diffs per period, both for Followers and Following
-- **Tabs:** Clean, instant switch between Follower and Following views
+- **Templating:** Pug
+- **Styling:** Tailwind CSS
+- **Server:** Node.js + Express
+- **Uploads:** multer → in-memory drag-and-drop modal → confirms only when files are present
+- **Diff logic:** reads Instagram’s JSON arrays, computes per-snapshot additions/removals
 
 ---
 
-## How to Run (If you are deploying yourself)
+## ⚙️ How to Run (If you are deploying yourself)
 
 1. Clone this repository
 2. Install dependencies:
@@ -87,11 +88,11 @@ To use Deltagram, you need to **download your followers/following data** from In
     ```sh
     npm start
     ```
-4. Open the app in your browser and upload your Instagram ZIPs!
+4. Open the app [in your browser](http://localhost:3000) and upload your Instagram ZIPs!
 
 ---
 
-## FAQ
+## 🤔 FAQ
 
 ### Can I automate ZIP downloads from Instagram?
 No. Instagram **requires manual downloads** for security and privacy reasons.
@@ -104,12 +105,12 @@ All processing is done locally/in your own instance. No data is sent to third pa
 
 ---
 
-## License
+## 📜 License
 
 MIT
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
 Pull requests and suggestions are welcome!
